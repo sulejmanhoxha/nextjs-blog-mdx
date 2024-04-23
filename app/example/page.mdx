@@ -1,57 +1,21 @@
-# Markdown syntax guide
+# Hello
+The debate between using spaces and tabs for indentation in coding may seem trivial to the uninitiated, but it is a topic that continues to inspire passionate discussions among developers. This seemingly minor choice can affect code readability, maintenance, and even team dynamics.
 
-## Headers
+import { SomeButton } from "@/components/SomeButton";
+<SomeButton />
 
-This is some text
+## The Case for Spaces
 
-## Emphasis
+Advocates for using spaces argue that it ensures consistent code appearance across different editors.
 
-*This text will be italic*
-_This will also be italic_
+## The Case for Tabs
 
-**This text will be bold**
-__This will also be bold__
+On the other side of the debate, proponents of tabs highlight the flexibility that.
 
-_You **can** combine them_
+## Conclusion
 
-## Lists
+While the spaces vs. tabs debate might. 
 
-### Unordered
-
-* Item 1
-* Item 2
-* Item 2a
-* Item 2b
-
-### Ordered
-
-1. Item 1
-2. Item 2
-3. Item 3
-    1. Item 3a
-    2. Item 3b
-
-## Images
-
-![This is an alt text.](/image/sample.webp "This is a sample image.")
-
-## Links
-
-You may be using [Markdown Live Preview](https://markdownlivepreview.com/).
-
-## Blockquotes
-
-> Markdown is a lightweight markup language with plain-text-formatting syntax, created in 2004 by John Gruber with Aaron Swartz.
->
->> Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor.
-
-## Tables
-
-|foo|bar|
-|---|---|
-|baz|bim|
-
-## Blocks of code
 ```py
 for item in range(6):
     if item == 3: break
@@ -60,16 +24,7 @@ else:
     print("Finally finished!")
 ```
 
-
-```js showLineNumbers {1-4,8-12} title="sdi test" caption="sdi"
-import getFormattedDate from "@/lib/getFormattedDate";
-import { getSortedPostsData, getPostData } from "@/lib/posts";
-import { notFound } from "next/navigation";
-import Link from "next/link";
-
-import DOMPurify from "dompurify";
-import { JSDOM } from "jsdom";
-
+```js
 export function generateStaticParams() {
   const posts = getSortedPostsData();
 
@@ -77,55 +32,4 @@ export function generateStaticParams() {
     postId: post.id,
   }));
 }
-
-export function generateMetadata({ params }: { params: { postId: string } }) {
-  const posts = getSortedPostsData();
-  const { postId } = params;
-
-  const post = posts.find((post) => post.id === postId);
-
-  if (!post) {
-    return {
-      title: "Post Not Found",
-    };
-  }
-
-  return {
-    title: post.title,
-  };
-}
-
-export default async function Post({ params }: { params: { postId: string } }) {
-  const posts = getSortedPostsData();
-  const { postId } = params;
-
-  if (!posts.find((post) => post.id === postId)) notFound();
-
-  const { title, date, contentHtml } = await getPostData(postId);
-
-  const pubDate = getFormattedDate(date);
-
-  return (
-    <main className="px-6 prose prose-slate dark:prose-invert mx-auto">
-      <h1 className="text-3xl mt-4 mb-0">{title}</h1>
-      <p className="mt-0">{pubDate}</p>
-      <article>
-        <section
-          dangerouslySetInnerHTML={{
-            __html: DOMPurify(new JSDOM("<!DOCTYPE html>").window).sanitize(
-              contentHtml
-            ),
-          }}
-        />
-        <p>
-          <Link href="/">← Back to home</Link>
-        </p>
-      </article>
-    </main>
-  );
-}
 ```
-
-## Inline code
-
-This web site is using `markedjs/marked`.
